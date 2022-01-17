@@ -15,7 +15,6 @@ module.exports = class Notebook extends Plugin {
     this._injectHeaderBarContainer()
     this._injectContextMenu()
     this._injectToolbar()
-		this.injectOpenContextMenuLazy();
 
     this.loadStylesheet('style.scss')
   }
