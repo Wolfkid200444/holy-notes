@@ -5,12 +5,12 @@ const { React } = require('powercord/webpack')
 const DeleteNotebook = require('../modals/DeleteNotebook')
 const CreateNotebook = require('../modals/CreateNotebook')
 
-module.exports = ({ notebook }) => {
-	if (notebook != 'Main') {
+module.exports = (args) => {
+	if (args.notebook != 'Main') {
 		return <>
 			<Button
 				color={Button.Colors.RED}
-				onClick={() => openModal(() => <DeleteNotebook notebook={notebook} />)}>
+				onClick={() => openModal(() => <DeleteNotebook {...args} />)}>
 				Delete Notebook
 			</Button>
 		</>

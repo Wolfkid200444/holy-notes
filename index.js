@@ -73,7 +73,7 @@ module.exports = class Notebook extends Plugin {
 		if (m) patch(m)
 		else {
 			const module = getModule([ 'openContextMenuLazy' ], false)
-			inject('holy-context-lazy-menu', module, 'openContextMenuLazy', args => {
+			inject('ub-context-lazy-menu', module, 'openContextMenuLazy', args => {
 				const lazyRender = args[1]
 				args[1] = async () => {
 					const render = await lazyRender(args[0])
@@ -81,7 +81,7 @@ module.exports = class Notebook extends Plugin {
 					return (config) => {
 						const menu = render(config)
 						if (menu?.type?.displayName === displayName && patch) {
-							uninject('holy-context-lazy-menu')
+							uninject('ub-context-lazy-menu')
 							patch(getModule(filter, false))
 							patch = false
 						}
