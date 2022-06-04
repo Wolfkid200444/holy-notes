@@ -27,10 +27,11 @@ module.exports = class Notebook extends Plugin {
   }
 
   async _injectHeaderBarContainer() {
-    const HeaderBarContainer = await getModuleByDisplayName('HeaderBarContainer')
+    const HeaderBarContainer = await getModule((m) => m?.default?.displayName === 'HeaderBarContainer');
     const classes = await getModule(['iconWrapper', 'clickable'])
-    inject('holy-header-bar', HeaderBarContainer.prototype, 'render', (args, res) => {
-      res.props.toolbar.props.children.push(
+
+    inject('holy-header-bar', HeaderBarContainer, 'default', (args, res) => {
+      res.props.children.props.toolbar.push(
         React.createElement(Tooltip, {
           text: 'Notebook', position: 'bottom'
         }, React.createElement('div', {
