@@ -31,16 +31,19 @@ module.exports = class Notebook extends Plugin {
     const classes = await getModule(['iconWrapper', 'clickable'])
 
     inject('holy-header-bar', HeaderBarContainer, 'default', (args, res) => {
-      res.props.children.props.toolbar.push(
-        React.createElement(Tooltip, {
-          text: 'Notebook', position: 'bottom'
-        }, React.createElement('div', {
-          className: `note-button ${classes.iconWrapper} ${classes.clickable}`
-        }, React.createElement(NotebookButton, {
-          className: `note-button ${classes.icon}`,
-          onClick: () =>
-            openModal(() => React.createElement(NotebookModal))
-        }))))
+      try {
+        res.props.children.props.toolbar.push(
+          React.createElement(Tooltip, {
+            text: 'Notebook', position: 'bottom'
+          }, React.createElement('div', {
+            className: `note-button ${classes.iconWrapper} ${classes.clickable}`
+          }, React.createElement(NotebookButton, {
+            className: `note-button ${classes.icon}`,
+            onClick: () =>
+              openModal(() => React.createElement(NotebookModal))
+          }))))
+      } catch (e) {
+      }
       return res
     })
   }
